@@ -1,12 +1,25 @@
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const { openSignIn } = useClerk();
+  const { isSignedIn } = useUser();
+
   return (
-    <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
-    <Link to="/">
-      <img src="/nobgfavicon.png" alt="nobg-logo" className="invert w-14" />
-    </Link>
-        <button className="bg-zinc-800 text-white flex items-center gap-4 px-4 py-2 sm:px-8 sm:py-1 text-sm rounded-full">
+    <div className="flex items-center justify-between mx-4 py-3 lg:mx-44 ">
+      <Link to="/">
+        <img src="/nobgfavicon.png" alt="nobg-logo" className="invert w-14" />
+      </Link>
+      {isSignedIn ? (
+        <div>
+          <UserButton />
+        </div>
+      ) : (
+        <button
+          onClick={() => openSignIn({})}
+          className="bg-zinc-800 text-white flex items-center gap-4 px-4 py-2 sm:px-8 sm:py-1 text-sm rounded-full
+      "
+        >
           Get Started
           <svg
             viewBox="0 0 24 24"
@@ -31,7 +44,8 @@ function Navbar() {
             </g>
           </svg>
         </button>
-      </div>
+      )}
+    </div>
   );
 }
 

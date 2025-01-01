@@ -2,7 +2,6 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Result from './pages/Result'
-import BuyCreds from './pages/BuyCreds'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 
@@ -15,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home />} />
         <Route path="/result" element={<Result />} />
-        <Route path="/buy" element={<BuyCreds />} />
+        {/* <Route path="/buy" element={<BuyCreds />} /> */}
       </Routes>
       <Footer />
     </div>
