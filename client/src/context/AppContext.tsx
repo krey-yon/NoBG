@@ -23,24 +23,28 @@ const AppContextProvider = (props: any) => {
   const [resultImage, setResultImage] = useState<string | null>(null);
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+
   //removebg
   const removebg = async (image: any) => {
     try {
       setImage(image);
-      console.log(image);
       navigate("/result");
-
+      
       const token = await getToken();
       const formData = new FormData();
       formData.append("image", image);
       const { data } = await axios.post(
         `${backendUrl}/api/image/remove-bg`,
         formData,
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: {token} }
       );
-
-      if (data.success) {
-        setResultImage(data.result);
+      // console.log(token);
+      // console.log(data);
+      
+      if (data) {
+        // console.log(data.resultImage);
+        setResultImage(data.resultImage);
+        // console.log("insidedata after seting result image");
       }
     } catch (error) {
       console.log(error);

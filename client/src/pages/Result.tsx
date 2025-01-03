@@ -26,7 +26,7 @@ function Result() {
             </p>
             <div className="rounded-md border border-gray-300 h-full relative bg-layer overflow-hidden">
               <img
-                src={resultImage ? resultImage : ""}
+                src={resultImage || ""}
                 alt="withoutbg"
                 width={800}
               />
@@ -40,7 +40,7 @@ function Result() {
         </div>
         {/* Download button */}
         <div className="flex justiffy-center sm:justify-end items-center flex-wrap gap-4 mt-6">
-          <button className="px-8 py-2.5 text-violet-600 text-sm border border-violet-600 rounded-full hover:scale-105 transition-all duration-700">
+          <button  className="px-8 py-2.5 text-violet-600 text-sm border border-violet-600 rounded-full hover:scale-105 transition-all duration-700">
             Try another image
           </button>
           <a
