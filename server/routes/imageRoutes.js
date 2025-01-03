@@ -1,4 +1,10 @@
 import express from 'express';
-import { removebg } from '../controllers/imageController.js';
-import upload from '../middleware/multer.js';
-import authUser from '../middleware/auth.js';
+import { removeBg } from '../controllers/imageControllers.js';
+import upload from '../middlewares/multer.js';
+import authUser from '../middlewares/auth.js';
+
+const imageRouter = express.Router();
+
+imageRouter.post('/remove-bg', authUser, upload.single('image'), removeBg);
+
+export default imageRouter;

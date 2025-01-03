@@ -1,33 +1,59 @@
+import { useAuth } from "@clerk/clerk-react";
+import axios from "axios";
 import { createContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AppContext = createContext({});
+interface AppContextType {
+  backendUrl: string;
+  image: File | null;
+  setImage: React.Dispatch<React.SetStateAction<File | null>>;
+  resultImage: string | null;
+  setResultImage: React.Dispatch<React.SetStateAction<string | null>>;
+  removebg: (image: File) => Promise<void>;
+}
+
+const AppContext = createContext<AppContextType>({} as AppContextType);
 
 const AppContextProvider = (props: any) => {
+  const navigate = useNavigate();
+  const { getToken } = useAuth();
 
-    const navigate = useNavigate();
-
-  const [image, setImage] = useState(false);
-  const [resultImage, setResultImage] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
+  const [resultImage, setResultImage] = useState<string | null>(null);
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   //removebg
   const removebg = async (image: any) => {
     try {
-        setImage(image);
-        console.log(image);
-        navigate("/result");
+      setImage(image);
+      console.log(image);
+      navigate("/result");
+
+      const token = await getToken();
+      const formData = new FormData();
+      formData.append("image", image);
+      const { data } = await axios.post(
+        `${backendUrl}/api/image/remove-bg`,
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        setResultImage(data.result);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const value = {
+  const value: AppContextType = {
     backendUrl,
     image,
     setImage,
     removebg,
+    resultImage,
+    setResultImage,
   };
 
   return (
