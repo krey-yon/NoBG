@@ -1,6 +1,10 @@
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 function Header() {
+  const { removebg } = useContext(AppContext);
+
   return (
     <div className="flex items-center justify-between max-sm:flex-col-reverse gap-y-10 px-4 mt-10 lg:px-44 sm:mt-20 ">
       {/* left side */}
@@ -18,7 +22,13 @@ function Header() {
           images every time. Simple, fast, and effective—try it now!
         </p>
         <div>
-          <input type="file" name="" id="upload1" hidden />
+          <input
+            onChange={(e: any) => removebg(e.target.files[0])}
+            type="file"
+            accept="image/*"
+            id="upload1"
+            hidden
+          />
           <label
             htmlFor="upload1"
             className="inline-flex gap-3 px-8 py-3.5 rounded-full cursor-pointer  bg-gradient-to-r from-violet-600 to-fuchsia-500 m-auto hover:scale-105 transition-all duration-700 "
