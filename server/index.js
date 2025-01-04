@@ -14,7 +14,7 @@ await connectDb();
 app.use(express.json());
 
 // Enable All CORS Requests
-app.use(cors( { origin: '*' } ));
+app.use(cors({ origin: "https://no-bg-kappa.vercel.app" }));
 
 app.get('/', (req, res) => {
   res.send('API WORKING');

@@ -45,7 +45,7 @@ const AppContextProvider = (props: any) => {
       if (data) {
         // console.log(data.resultImage);
         setResultImage(data.resultImage);
-        console.log("insidedata after seting result image");
+        // console.log("insidedata after seting result image");
       }
     } catch (error) {
       console.log(error);
