@@ -35,7 +35,7 @@ const AppContextProvider = (props: any) => {
       formData.append("image", image);
       console.log(backendUrl);
       const { data } = await axios.post(
-        `${backendUrl}/api/image/remove-bg`,
+        `${backendUrl}api/image/remove-bg`,
         formData,
         { headers: {token} }
       );
